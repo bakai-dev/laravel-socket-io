@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('props-component', require('./components/PropsComponent.vue').default);
+Vue.component('ajax-component', require('./components/AjaxComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

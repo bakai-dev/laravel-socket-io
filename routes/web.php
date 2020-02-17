@@ -23,6 +23,9 @@ Route::get('/start', 'StartController@star')->name('start');
 
 Route::get('/props', 'StartController@props')->name('start');
 
+Route::post('/getJson', 'StartController@getJson')->name('getJson');
+
+Route::get('/ajax', 'StartController@getJsonView')->name('getJsonView');
 
 Route::get('/start', function () {
     return view('start');
