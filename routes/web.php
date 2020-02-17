@@ -19,9 +19,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/start', 'StartController@star')->name('start');
+
+Route::get('/props', 'StartController@props')->name('start');
+
+
 Route::get('/start', function () {
     return view('start');
 });
+
 
 Auth::routes();
 
