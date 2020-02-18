@@ -19,17 +19,20 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/start', 'StartController@star')->name('start');
+// For example component
+Route::get('/start', 'StartController@start')->name('start');
 
+// For props
 Route::get('/props', 'StartController@props')->name('start');
 
+// For ajax
 Route::post('/getJson', 'StartController@getJson')->name('getJson');
-
 Route::get('/ajax', 'StartController@getJsonView')->name('getJsonView');
 
-Route::get('/start', function () {
-    return view('start');
-});
+// For chart
+Route::post('/chartData', 'StartController@chartData')->name('chartData');
+Route::get('/chart', 'StartController@chartDataView')->name('chartDataView');
+
 
 
 Auth::routes();

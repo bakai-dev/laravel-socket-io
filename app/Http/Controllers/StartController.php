@@ -43,4 +43,23 @@ class StartController extends Controller
     {
         return view('ajax');
     }
+
+
+
+    public function chartData()
+    {
+        return [
+            'labels' => ['март', 'аперль', 'май', 'июнь'],
+            'datasets' => [[
+                'label' => 'Продажи',
+                'backgroundColor' => '#F26202',
+                'data' => [15000, 5000, 10000, 0],
+            ]]
+        ];
+    }
+
+    public function chartDataView()
+    {
+        return view('chartData');
+    }
 }

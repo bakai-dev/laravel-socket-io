@@ -3,15 +3,15 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <button v-if="loaded" class="btn">
-                   Загрузка...
+                   Loading ...
                 </button>
                 <button @click="getData" v-else class="btn">
-                    Обновить {{count}}
+                    Update {{count}}
                 </button>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Имя</th>
+                            <th>Name</th>
                             <th>Url</th>
                         </tr>
                     </thead>

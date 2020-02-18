@@ -40,6 +40,13 @@
                 top: 18px;
             }
 
+            .top-left {
+                position: absolute;
+                left: 10px;
+                top: 18px;
+                float: right;
+            }
+
             .content {
                 text-align: center;
             }
@@ -65,6 +72,30 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+            <div class="top-left  links">
+
+                <a href="{{ url('/') }}">
+                    Laravel
+                </a>
+
+                <a href="{{ url('/props') }}">
+                    props
+                </a>
+
+                <a href="{{ url('/start') }}">
+                    start
+                </a>
+
+                <a href="{{ url('/ajax') }}">
+                    ajax
+                </a>
+
+                <a href="{{ url('/chart') }}">
+                    chart
+                </a>
+
+            </div>
+
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
