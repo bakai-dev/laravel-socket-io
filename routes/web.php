@@ -40,6 +40,9 @@ Route::get('/random-chart', 'StartController@randomChartView')->name('random-cha
 Route::post('/socket-chart', 'StartController@socketChart')->name('socket-chart');
 Route::get('/socket-chart', 'StartController@socketChartView')->name('socket-chartView');
 
+Route::post('/chat', 'StartController@chat')->name('chat');
+Route::get('/chat', 'StartController@chatView')->name('chatView');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

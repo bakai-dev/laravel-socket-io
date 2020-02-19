@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Events\SendMessage;
 use Illuminate\Http\Request;
 
 class StartController extends Controller
@@ -121,5 +122,17 @@ class StartController extends Controller
     public function  socketChartView()
     {
         return view('socketChart');
+    }
+
+
+
+    public function chat(Request $request)
+    {
+        event(New SendMessage($request->input('message')));
+    }
+
+    public function  chatView()
+    {
+        return view('chat');
     }
 }

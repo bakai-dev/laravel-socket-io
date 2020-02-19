@@ -101,6 +101,9 @@
                     socketChart
                 </a>
 
+                <a href="{{ url('/chat') }}">
+                    chat
+                </a>
             </div>
 
             @if (Route::has('login'))
