@@ -94,6 +94,10 @@
                     chart
                 </a>
 
+                <a href="{{ url('/random-chart') }}">
+                    random-chart
+                </a>
+
             </div>
 
             @if (Route::has('login'))

@@ -33,6 +33,8 @@ Route::get('/ajax', 'StartController@getJsonView')->name('getJsonView');
 Route::post('/chartData', 'StartController@chartData')->name('chartData');
 Route::get('/chart', 'StartController@chartDataView')->name('chartDataView');
 
+Route::post('/random-chart', 'StartController@randomChart')->name('random-chart');
+Route::get('/random-chart', 'StartController@randomChartView')->name('random-chartView');
 
 
 Auth::routes();

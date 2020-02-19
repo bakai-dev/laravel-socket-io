@@ -62,4 +62,30 @@ class StartController extends Controller
     {
         return view('chartData');
     }
+
+
+
+    public function randomChart()
+    {
+        return [
+            'labels' => ['март', 'аперль', 'май', 'июнь'],
+            'datasets' => [
+                [
+                'label' => 'Серебро',
+                'backgroundColor' => '#F26202',
+                'data' => [rand(0, 40000), rand(0, 40000), rand(0, 40000), rand(0, 40000)],
+                 ],
+                [
+                    'label' => 'Золото',
+                    'backgroundColor' => '#B26202',
+                    'data' => [rand(0, 40000), rand(0, 40000), rand(0, 40000), rand(0, 40000)],
+                ],
+           ]
+        ];
+    }
+
+    public function  randomChartView()
+    {
+        return view('randomChart');
+    }
 }
