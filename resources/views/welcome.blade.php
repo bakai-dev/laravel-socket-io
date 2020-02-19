@@ -104,6 +104,11 @@
                 <a href="{{ url('/chat') }}">
                     chat
                 </a>
+
+
+                <a href="{{ url('/private-chat') }}">
+                    private-chat
+                </a>
             </div>
 
             @if (Route::has('login'))

@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Events\PrivateMessage;
 use App\Events\SendMessage;
 use Illuminate\Http\Request;
 
@@ -134,5 +135,17 @@ class StartController extends Controller
     public function  chatView()
     {
         return view('chat');
+    }
+
+    public function privateChat(Request $request)
+    {
+        PrivateMessage::dispatch($request->all());
+      //  event(New SendMessage($request->input('message')));
+        return $request->all();
+    }
+
+    public function  privateChatView()
+    {
+        return view('privateChat');
     }
 }

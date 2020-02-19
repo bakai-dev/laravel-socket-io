@@ -43,6 +43,9 @@ Route::get('/socket-chart', 'StartController@socketChartView')->name('socket-cha
 Route::post('/chat', 'StartController@chat')->name('chat');
 Route::get('/chat', 'StartController@chatView')->name('chatView');
 
+Route::post('/private-chat', 'StartController@privateChat')->name('chat');
+Route::get('/private-chat', 'StartController@privateChatView')->name('chatView');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
