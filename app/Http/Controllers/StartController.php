@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 
+use Illuminate\Http\Request;
+
 class StartController extends Controller
 {
     private $url_data;
@@ -87,5 +89,37 @@ class StartController extends Controller
     public function  randomChartView()
     {
         return view('randomChart');
+    }
+
+
+
+    public function socketChart(Request  $request)
+    {
+        $result = [
+            'labels' => ['март', 'аперль', 'май', 'июнь'],
+            'datasets' => [
+                [
+                    'label' => 'lol',
+                    'backgroundColor' => '#F26202',
+                    'data' => [15000, 5000, 10000, 0],
+                ],
+            ]
+        ];
+        if ($request->has('label')) {
+            $result['labels'][] = $request->input('label');
+            $result['datasets'][0]['data'][] = (integer)$request->input('sale');
+        }
+        if ($request->has('realtime')) {
+            if (filter_var($request->input('realtime') , FILTER_VALIDATE_BOOLEAN)) {
+                event(new \App\Events\NewEvent($result));
+            }
+        }
+
+        return $result;
+    }
+
+    public function  socketChartView()
+    {
+        return view('socketChart');
     }
 }

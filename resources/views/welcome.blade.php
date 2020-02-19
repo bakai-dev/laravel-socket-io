@@ -97,6 +97,9 @@
                 <a href="{{ url('/random-chart') }}">
                     random-chart
                 </a>
+                <a href="{{ url('/socket-chart') }}">
+                    socketChart
+                </a>
 
             </div>
 

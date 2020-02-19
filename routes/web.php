@@ -37,6 +37,9 @@ Route::post('/random-chart', 'StartController@randomChart')->name('random-chart'
 Route::get('/random-chart', 'StartController@randomChartView')->name('random-chartView');
 
 
+Route::post('/socket-chart', 'StartController@socketChart')->name('socket-chart');
+Route::get('/socket-chart', 'StartController@socketChartView')->name('socket-chartView');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
