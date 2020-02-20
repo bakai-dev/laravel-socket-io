@@ -10,11 +10,20 @@
                             <option v-for="user in users"  :value="'news-action.' + user.id">{{user.email}}</option>
                         </select>
                     </div>
+
                     <div class="col-sm-8">
                         <div class="form-group">
                             <textarea rows="6" class="form-control" readonly>{{messages.join('\n')}}</textarea>
                             <span v-if="isActive">{{isActive.name}} набирает сообщение</span>
                         </div>
+                    </div>
+                    <div class="col-sm-4">
+                        Online
+                        <ul>
+                            <li v-for="user in activeUsers">
+                                {{user}}
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -44,6 +53,17 @@
         ],
         mounted() {
             this.channel
+            // для отслеживания всех участников
+                .here((users) => {
+                    this.activeUsers = users;
+                })
+                .joining((user) => {
+                    this.activeUsers.push(user);
+                })
+                .leaving((user) => {
+                    this.activeUsers.slice(this.activeUsers.indexOf(user), 1);
+                })
+
                 .listen('PrivateMessage', ({data}) => {
                     this.messages.push(data.body)
                     this.isActive = false;
@@ -51,7 +71,7 @@
                 .listenForWhisper('typing', (e) => {
                     this.isActive = e;
                     if (this.typingTimer) clearTimeout(this.typingTimer);
-                   this.clearTimeout = setTimeout(() => {
+                    this.clearTimeout = setTimeout(() => {
                         this.isActive = false;
                     }, 2000);
                 });
@@ -59,7 +79,7 @@
         },
         computed: {
             channel() {
-                return window.Echo.private('room.' + this.room.id);
+                return window.Echo.join('room.' + this.room.id);
             }
         },
         data: function () {
@@ -68,7 +88,8 @@
                 textMessage: '',
                 usersSelect: [],
                 isActive: false,
-                typingTimer: false
+                typingTimer: false,
+                activeUsers: []
             }
         },
         methods: {

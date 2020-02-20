@@ -2668,13 +2668,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['users', 'user', 'room'],
   mounted: function mounted() {
     var _this = this;
 
-    this.channel.listen('PrivateMessage', function (_ref) {
+    this.channel // для отслеживания всех участников
+    .here(function (users) {
+      _this.activeUsers = users;
+    }).joining(function (user) {
+      _this.activeUsers.push(user);
+    }).leaving(function (user) {
+      _this.activeUsers.slice(_this.activeUsers.indexOf(user), 1);
+    }).listen('PrivateMessage', function (_ref) {
       var data = _ref.data;
 
       _this.messages.push(data.body);
@@ -2690,7 +2706,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     channel: function channel() {
-      return window.Echo["private"]('room.' + this.room.id);
+      return window.Echo.join('room.' + this.room.id);
     }
   },
   data: function data() {
@@ -2699,7 +2715,8 @@ __webpack_require__.r(__webpack_exports__);
       textMessage: '',
       usersSelect: [],
       isActive: false,
-      typingTimer: false
+      typingTimer: false,
+      activeUsers: []
     };
   },
   methods: {
@@ -84439,6 +84456,23 @@ var render = function() {
                   ])
                 : _vm._e()
             ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-4" }, [
+            _vm._v("\n                    Online\n                    "),
+            _c(
+              "ul",
+              _vm._l(_vm.activeUsers, function(user) {
+                return _c("li", [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(user) +
+                      "\n                        "
+                  )
+                ])
+              }),
+              0
+            )
           ])
         ]),
         _vm._v(" "),
