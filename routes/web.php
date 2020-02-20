@@ -53,6 +53,11 @@ Route::get('/echo-chat', 'ChatController@echoChatView')->name('chatView');
 Route::post('/private-echo-chat', 'ChatController@privateEchoChat')->name('chat');
 Route::get('/private-echo-chat', 'ChatController@privateEchoChatView')->name('chatView');
 
+
+Route::post('/room', 'ChatController@chatRoom')->name('chat');
+Route::get('/room/{room}', 'ChatController@chatRoomView')->name('chatView');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

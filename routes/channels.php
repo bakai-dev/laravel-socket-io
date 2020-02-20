@@ -16,7 +16,14 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 });*/
 
 
-Broadcast::channel('room.{room_id}', function ($user, $room_id) {
+/*Broadcast::channel('room.{room_id}', function ($user, $room_id) {
     //return true;
     return (int) $user->id === (int) $room_id;
+});*/
+
+
+Broadcast::channel('room.{room_id}', function ($user, $room_id) {
+    //return true;
+    // contains - ишет в коллекции значение
+    return  $user->rooms->contains($room_id);
 });

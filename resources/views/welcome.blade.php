@@ -96,9 +96,9 @@
                 </a>
 --}}
 
-                <a href="{{ url('/random-chart') }}">
+ {{--               <a href="{{ url('/random-chart') }}">
                     Random chart
-                </a>
+                </a>--}}
                 <a href="{{ url('/socket-chart') }}">
                     Socket chart
                 </a>
@@ -118,6 +118,10 @@
 
                 <a href="{{ url('/private-echo-chat') }}">
                     Private echo chat
+                </a>
+
+                <a href="{{ url('/room/1') }}">
+                  Room chat
                 </a>
             </div>
 
