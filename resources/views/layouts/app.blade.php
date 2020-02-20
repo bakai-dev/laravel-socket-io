@@ -26,28 +26,28 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-
+{{--
                 <a class="navbar-brand" href="{{ url('/props') }}">
                     props
                 </a>
 
                 <a class="navbar-brand" href="{{ url('/start') }}">
                     start
-                </a>
+                </a>--}}
 
                 <a class="navbar-brand" href="{{ url('/ajax') }}">
-                    ajax
+                    Ajax
                 </a>
 
-                <a class="navbar-brand" href="{{ url('/chart') }}">
-                    chart
-                </a>
+{{--                <a class="navbar-brand" href="{{ url('/chart') }}">
+                    Chart
+                </a>--}}
 
                 <a class="navbar-brand" href="{{ url('/random-chart') }}">
-                    random-chart
+                    Random chart
                 </a>
                 <a class="navbar-brand" href="{{ url('/socket-chart') }}">
-                    socketChart
+                    Socket chart
                 </a>
                 <a class="navbar-brand" href="{{ url('/chat') }}">
                     Chat
@@ -56,14 +56,17 @@
 
 
                 <a class="navbar-brand" href="{{ url('/private-chat') }}">
-                    private Chat
+                    Private chat
                 </a>
 
 
                 <a class="navbar-brand" href="{{ url('/echo-chat') }}">
-                    Echo Chat
+                    Echo chat
                 </a>
 
+                <a class="navbar-brand" href="{{ url('/private-echo-chat') }}">
+                    Private echo chat
+                </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

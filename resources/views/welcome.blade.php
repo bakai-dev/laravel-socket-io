@@ -77,41 +77,47 @@
                 <a href="{{ url('/') }}">
                     Laravel
                 </a>
-
+{{--
                 <a href="{{ url('/props') }}">
                     props
                 </a>
 
                 <a href="{{ url('/start') }}">
                     start
-                </a>
+                </a>--}}
 
                 <a href="{{ url('/ajax') }}">
-                    ajax
+                    Ajax
                 </a>
+{{--
 
                 <a href="{{ url('/chart') }}">
-                    chart
+                    Chart
                 </a>
+--}}
 
                 <a href="{{ url('/random-chart') }}">
-                    random-chart
+                    Random chart
                 </a>
                 <a href="{{ url('/socket-chart') }}">
-                    socketChart
+                    Socket chart
                 </a>
 
                 <a href="{{ url('/chat') }}">
-                    chat
+                    Chat
                 </a>
 
 
                 <a href="{{ url('/private-chat') }}">
-                    private-chat
+                    Private chat
                 </a>
 
                 <a href="{{ url('/echo-chat') }}">
-                    echo-chat
+                    Echo chat
+                </a>
+
+                <a href="{{ url('/private-echo-chat') }}">
+                    Private echo chat
                 </a>
             </div>
 

@@ -15,17 +15,16 @@ class PrivateMessage implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
+   public $data;
 
     public function __construct($data)
     {
-        $this->message = $data;
+        $this->data = $data;
+        $this->dontBroadcastToCurrentUser();
     }
-
 
     public function broadcastOn()
     {
-        return $this->message['channels'];
-        //return new PrivateChannel('channel-name');
+        return new PrivateChannel('room.' .$this->data['room_id']);
     }
 }
