@@ -2666,23 +2666,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['users', 'user', 'room'],
   mounted: function mounted() {
     var _this = this;
 
-    window.Echo["private"]('room.' + this.room.id).listen('PrivateMessage', function (_ref) {
+    this.channel.listen('PrivateMessage', function (_ref) {
       var data = _ref.data;
 
       _this.messages.push(data.body);
+
+      _this.isActive = false;
+    }).listenForWhisper('typing', function (e) {
+      _this.isActive = e;
+      if (_this.typingTimer) clearTimeout(_this.typingTimer);
+      _this.clearTimeout = setTimeout(function () {
+        _this.isActive = false;
+      }, 2000);
     });
+  },
+  computed: {
+    channel: function channel() {
+      return window.Echo["private"]('room.' + this.room.id);
+    }
   },
   data: function data() {
     return {
       messages: [],
       textMessage: '',
-      usersSelect: []
+      usersSelect: [],
+      isActive: false,
+      typingTimer: false
     };
   },
   methods: {
@@ -2701,6 +2718,12 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.textMessage = ''; //console.log(res);
         //this.data = res.data;
+      });
+    },
+    actionUser: function actionUser() {
+      // транцляция события в канал - whisper() // пользователь набирает сообшение
+      this.channel.whisper('typing', {
+        name: this.user.name
       });
     }
   }
@@ -84408,7 +84431,13 @@ var render = function() {
                   attrs: { rows: "6", readonly: "" }
                 },
                 [_vm._v(_vm._s(_vm.messages.join("\n")))]
-              )
+              ),
+              _vm._v(" "),
+              _vm.isActive
+                ? _c("span", [
+                    _vm._v(_vm._s(_vm.isActive.name) + " набирает сообщение")
+                  ])
+                : _vm._e()
             ])
           ])
         ]),
@@ -84427,6 +84456,7 @@ var render = function() {
             attrs: { type: "text", placeholder: "Сообщение" },
             domProps: { value: _vm.textMessage },
             on: {
+              keydown: _vm.actionUser,
               input: function($event) {
                 if ($event.target.composing) {
                   return
@@ -84441,7 +84471,18 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-outline-secondary",
-                on: { click: _vm.sendMessage, submit: _vm.sendMessage }
+                on: {
+                  keyup: function($event) {
+                    if (
+                      !$event.type.indexOf("key") &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.sendMessage($event)
+                  },
+                  click: _vm.sendMessage
+                }
               },
               [_vm._v("Отравить")]
             )

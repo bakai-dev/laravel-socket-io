@@ -13,14 +13,16 @@
                     <div class="col-sm-8">
                         <div class="form-group">
                             <textarea rows="6" class="form-control" readonly>{{messages.join('\n')}}</textarea>
+                            <span v-if="isActive">{{isActive.name}} набирает сообщение</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="text"  class="form-control" v-model="textMessage" placeholder="Сообщение">
+                    <input type="text" @keydown="actionUser"  class="form-control" v-model="textMessage" placeholder="Сообщение">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" @click="sendMessage" @submit="sendMessage">Отравить</button>
+                        <button class="btn btn-outline-secondary" @keyup.enter="sendMessage" @click="sendMessage" >Отравить</button>
+
                     </div>
 
                 </div>
@@ -41,17 +43,32 @@
             'room'
         ],
         mounted() {
-            window.Echo.private('room.' + this.room.id)
+            this.channel
                 .listen('PrivateMessage', ({data}) => {
                     this.messages.push(data.body)
+                    this.isActive = false;
+                })
+                .listenForWhisper('typing', (e) => {
+                    this.isActive = e;
+                    if (this.typingTimer) clearTimeout(this.typingTimer);
+                   this.clearTimeout = setTimeout(() => {
+                        this.isActive = false;
+                    }, 2000);
                 });
 
+        },
+        computed: {
+            channel() {
+                return window.Echo.private('room.' + this.room.id);
+            }
         },
         data: function () {
             return {
                 messages: [],
                 textMessage: '',
                 usersSelect: [],
+                isActive: false,
+                typingTimer: false
             }
         },
         methods: {
@@ -72,6 +89,13 @@
                         //this.data = res.data;
                     });
             },
+
+            actionUser () {
+                // транцляция события в канал - whisper() // пользователь набирает сообшение
+                this.channel.whisper('typing', {
+                    name: this.user.name
+                })
+            }
         }
     }
 </script>
